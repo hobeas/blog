@@ -1,0 +1,15 @@
+<footer class="site-footer text-center">
+  <small>©2019 Hobeas
+    <a href="http://www.beian.miit.gov.cn/" target="_blank">闽ICP备16028900号</a>
+    <a href="https://github.com/{{ site.github_username| cgi_escape | escape }}" target="_blank">
+      <svg class="svg-icon">
+        <use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use>
+      </svg>
+    </a>
+  </small>
+</footer>
+
+{%- if jekyll.environment == 'production' -%}
+<span id="cnzz_stat_icon_1278100450" class="cnzz"></span>
+<script src="https://s4.cnzz.com/z_stat.php?id=1278100450&online=2"></script>
+{%- endif -%}

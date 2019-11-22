@@ -1,0 +1,29 @@
+lang: zh-Hans
+title: Hobeas blog
+author: hobeas
+description: >
+  程序猿一枚
+baseurl: "/blog"
+github_username: hobeas
+
+# show_excerpts: true
+
+# Build settings
+theme: minima
+minima:
+  date_format: "%y-%m-%d %k:%M"
+
+permalink: /:categories/:title
+
+plugins:
+  - jekyll-feed
+
+defaults:
+  -
+    scope:
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - README.md

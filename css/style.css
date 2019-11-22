@@ -1,0 +1,27 @@
+/* common */
+.text-center {
+  text-align: center
+}
+
+/* page */
+
+.site-header {
+  border-top: unset;
+}
+
+.post-link {
+  display: unset;
+}
+
+.site-footer {
+  padding: 15px 0;
+  color: #999;
+}
+
+.site-footer a {
+  color: #999;
+}
+
+.cnzz {
+  display: none;
+}
