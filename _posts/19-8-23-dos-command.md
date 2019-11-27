@@ -98,6 +98,31 @@ use test
 db.createUser({user:"test1",pwd:"test123456",roles:[{role:"readWrite",db:"securitydata"}]})
 ```
 
+访问量+1，用 `$inc`
+findOneAndUpdate({ _id },{ $inc: { views: 1 } },{ new: true })
+
+mongodb 值为null不检查唯一性
+{unique: true, sparse: true}
+
+条件操作符
+$lt、$lte、$gt、$gte、$ne
+< 、 <= 、 > 、 >=、!=
+
+原子操作符：`$and`, `$or`, `$nor`
+
+$in/$nin/$or/$not
+$exists
+数组过滤：$elemMatch
+
+limit, skip, sort
+
+数组修改器
+$push 已有的数组末尾加入一个元素
+$addtoset 往数组里加数据，若数组里已存在，则不会加入（避免重复）
+$pop 删除数组元素，只能从头部（-1）或尾部（1）删除一个元素
+$pull 删除数组元素，将所有匹配的元素删除
+
+
 # Mac
 
 ```sh
@@ -251,3 +276,16 @@ uniq 删除数组冗余项
 upcase 大写
 url_decode URL解码
 url_encode URL编码
+
+
+# Chrome
+
+## 保存整个网页为图片
+
+打开需要保存为图片的网页
+然后按F12，接着按Ctrl+Shift+P
+在红框内输入full
+点击下面的“Capture full size screenshot”就可以保存整个网页为图片了
+
+> 方法来自 [二小怪](https://www.cnblogs.com/ChouXiaoShou/p/ChromeScreenshot.html)
+

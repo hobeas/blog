@@ -26,4 +26,5 @@ defaults:
       layout: post
 
 exclude:
+  - test
   - README.md
