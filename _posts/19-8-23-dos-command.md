@@ -56,71 +56,6 @@ logout
 source ~/.bashrc
 ```
 
-# MongoDB
-
-```sh
-# 查看路径
-whereis mongodb
-
-# 查看进程是否开启
-ps aux |grep mongodb
-# 关闭进程（13461是查到的pid）
-kill -9 13461
-
-# 查看端口是否开启
-netstat -anpt|grep 27017
-
-# 以配置文件启动
-mongod -f mongodb.conf
-# 关闭
-mongod -f mongodb.conf --shutdown
-
-# brew 启动 mongo
-brew services start mongodb
-
-# 查看所有数据库
-show dbs
-# 显示当前数据库
-db
-# 创建或切换数据库
-use webtest1
-# 删除数据库
-db.dropDatabase()
-
-# 创建用户管理员
-use admin
-db.createUser({user:"root",pwd:"root123456",roles:["userAdminAnyDatabase"]})
-# 认证
-db.auth('root','root123456')
-
-# 创建普通用户
-use test
-db.createUser({user:"test1",pwd:"test123456",roles:[{role:"readWrite",db:"securitydata"}]})
-```
-
-访问量+1，用 `$inc`
-findOneAndUpdate({ _id },{ $inc: { views: 1 } },{ new: true })
-
-mongodb 值为null不检查唯一性
-{unique: true, sparse: true}
-
-条件操作符
-$lt、$lte、$gt、$gte、$ne
-< 、 <= 、 > 、 >=、!=
-
-原子操作符：`$and`, `$or`, `$nor`
-
-$in/$nin/$or/$not
-$exists
-数组过滤：$elemMatch
-
-limit, skip, sort
-
-数组修改器
-$push 已有的数组末尾加入一个元素
-$addtoset 往数组里加数据，若数组里已存在，则不会加入（避免重复）
-$pop 删除数组元素，只能从头部（-1）或尾部（1）删除一个元素
-$pull 删除数组元素，将所有匹配的元素删除
 
 
 # Mac
@@ -206,6 +141,9 @@ git config --global user.email "hobeas@qq.com"
 
 # github 拉取私有库
 git clone https://<username>:<password>@github.com/<username>/<project-name>.git
+
+# 查看两个提交版本id修改了那些文件
+$ git diff commit-id1 commit-id2 --stat
 
 ```
 
