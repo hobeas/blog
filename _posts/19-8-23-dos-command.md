@@ -129,6 +129,15 @@ brew install ffmpeg
 
 # 下载 ts 视频（找到m3u8文件）
 ffmpeg -i http://www.xxx.com/xxx.m3u8 name.mp4
+
+# 合并音频和视频
+ffmpeg -i video.mp4 -i audio.wav -c:v copy -c:a aac -strict experimental output.mp4
+
+# 合并B站音视频
+ffmpeg -i video.m4s -i audio.m4s -c:v copy -c:a copy output.mp4
+
+# 去水印。水印左上角的x坐标、y坐标，w宽度、h高度
+ffmpeg -i video.mp4 -filter_complex "delogo=x=680:y=5:w=150:h=40" output.mp4
 ```
 
 
