@@ -1,28 +1,17 @@
 ---
 title: 一些常用 dos 命令小记
-date:  19-8-23 0:25 +08
+date: 19-8-23 0:25 +08
 ---
 
 [TOC]
 
-# CentOS
+# CentOS7
+
 ```sh
 # 查看当前路径
 pwd
 # 查看命令手册
 man pwd
-
-# 查看防火墙
-systemctl status firewalld
-# 开启
-systemctl start firewalld
-# 关闭
-systemctl stop firewall
-
-# 查看开放的端口
-firewall-cmd --list-ports
-# 开放 27017 端口
-firewall-cmd --zone=public --permanent --add-port=27017/tcp; firewall-cmd --reload
 
 # mac 上传文件到 Linux 服务器
 # scp 文件名 用户名@服务器ip:目标路径
@@ -43,22 +32,89 @@ ls -l --time=atime
 # 创建一个相对路径的超链接
 ln -s ../archive
 
-# 解压中文不乱码
-unzip -O CP936 html5-200.zip
-
 # 将SSH公钥复制到主机，开启无密码登录
 ssh-copy-id root@192.168.0.100
 
 # 断开ssh，不关闭终端。按 Ctrl+D 或
 logout
 
-修改 .bashrc 后使其生效
+# 重启
+reboot
+
+# 修改 .bashrc 后使其生效
 source ~/.bashrc
+
 ```
 
+## 防火墙 firewall
 
+```sh
+# 查看防火墙
+systemctl status firewalld
+# 开启
+systemctl start firewalld
+# 关闭
+systemctl stop firewalld
 
-# Mac
+# 查看开放的端口
+firewall-cmd --list-ports
+# 开放 27017 端口
+firewall-cmd --zone=public --permanent --add-port=27017/tcp; firewall-cmd --reload
+# 关闭端口
+firewall-cmd --zone=public --permanent --remove-port=27017/tcp; firewall-cmd --reload
+# 查看端口状态
+firewall-cmd --query-port=27017/tcp
+```
+
+## 压缩解压 tar
+
+```sh
+# 解压 .tar.gz
+tar -xzvf file.tar.gz
+# 压缩 .tar.gz
+tar -czf file.tar.gz ./a.md ./b.txt
+# 解压 .tar
+tar -xvf file.tar
+# 压缩 .tar
+tar -czf file.tar ./a.md
+
+# 解压中文不乱码
+unzip -O CP936 html5-200.zip
+```
+
+## 配置 nginx 自动启动
+
+1. `vi /usr/lib/systemd/system/nginx.service`
+
+2. 填写以下文本
+
+```ini
+[Unit]
+Description=nginx
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/nginx/sbin/nginx
+ExecReload=/usr/local/nginx/sbin/nginx -s reload
+ExecStop=/usr/local/nginx/sbin/nginx -s quit
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+```
+
+3. 启动 `systemctl start nginx`
+
+- 关闭 `systemctl stop nginx`
+
+## 增加 ssh 端口号
+
+1. 执行 `vi /etc/ssh/sshd_config`
+2. 在 `Port 22` 下面加一行 `Port 7011`
+3. 重启 ssh `systemctl restart sshd`
+
+# MacOS
 
 ```sh
 # 查看端口占用的进程
@@ -80,10 +136,9 @@ defaults write com.apple.dock springboard-columns -int 10
 defaults write com.apple.dock ResetLaunchPad -bool TRUE;killall Dock
 
 ```
+
 mac 禁止应用更新提示：
-进入应用程序，选中该app，右键选“显示包内容”，进入“Contents”文件夹，把里面的“_MASReceipt”文件夹删了，OK！
-
-
+进入应用程序，选中该 app，右键选“显示包内容”，进入“Contents”文件夹，把里面的“\_MASReceipt”文件夹删了，OK！
 
 # Nginx
 
@@ -120,7 +175,6 @@ nginx -c /etc/nginx/nginx.conf
 配置文件路径：`/etc/nginx/nginx.conf`
 服务器默认路径：`/usr/share/nginx/html`
 
-
 # ffmpeg
 
 ```sh
@@ -138,8 +192,13 @@ ffmpeg -i video.m4s -i audio.m4s -c:v copy -c:a copy output.mp4
 
 # 去水印。水印左上角的x坐标、y坐标，w宽度、h高度
 ffmpeg -i video.mp4 -filter_complex "delogo=x=680:y=5:w=150:h=40" output.mp4
-```
 
+# 改尺寸去黑边。a输出宽度，b输出高度，c左移距离，d上移距离
+ffmpeg -i video.mp4 -vf crop=a:b:c:d output.mp4
+
+# 裁剪视频。从3分10s处开始剪切，持续2分16秒
+ffmpeg -i video.mp4 -ss 3:10 -t 2:16 -codec copy output.mp4
+```
 
 # git
 
@@ -154,6 +213,16 @@ git clone https://<username>:<password>@github.com/<username>/<project-name>.git
 # 查看两个提交版本id修改了那些文件
 $ git diff commit-id1 commit-id2 --stat
 
+# 创建独立分支 test
+git checkout --orphan test
+
+# 后退两步的提交历史
+git checkout HEAD^2
+# 做一些事，如打包
+npm run build
+# 回到分支
+git checkout develop
+
 ```
 
 # ssh
@@ -167,10 +236,20 @@ ssh-keygen -t rsa -C hobeas@qq.com
 pbcopy < ~/.ssh/id_rsa.pub
 ```
 
+# pm2
+
+```sh
+# 保存
+pm2 save
+
+# 开机运行
+pm2 startup
+
+```
 
 # Liquid
 
-or, and, contains, 
+or, and, contains,
 真值: 除了 nil 和 false 之外的所有值都是真值
 数据类型: String, Number, Boolean, Nil, Array
 剔除空白符: `{ {- -} }`、`{ %- -% }`（中间不能有空格，为了编译...）
@@ -188,8 +267,8 @@ at_most 将数字限制在最大值
 capitalize 首字母大写
 ceil 向上取整
 compact 删除数组中的所有 nil 值
-concat 拼接数组, split 
-date strftime语法 (如%F %T)
+concat 拼接数组, split
+date strftime 语法 (如%F %T)
 default 指定一个默认值
 divided_by 将两个数相除
 downcase 转为小写
@@ -215,24 +294,22 @@ slice 切片
 sort (sort_natural) 排序(不区分大小写)
 split 字符串转数组
 strip 删除两侧空白符
-strip_html 删除HTML标签
+strip_html 删除 HTML 标签
 strip_newlines 删除换行符
 times 相乘
 truncate (truncatewords) 截短省略(单词个数)
 uniq 删除数组冗余项
 upcase 大写
-url_decode URL解码
-url_encode URL编码
-
+url_decode URL 解码
+url_encode URL 编码
 
 # Chrome
 
 ## 保存整个网页为图片
 
-打开需要保存为图片的网页
-然后按F12，接着按Ctrl+Shift+P
-在红框内输入full
-点击下面的“Capture full size screenshot”就可以保存整个网页为图片了
+1. 打开需要保存为图片的网页
+2. 按 F12，接着按 Ctrl+Shift+P
+3. 在红框内输入 full
+4. 点击下面的“Capture full size screenshot”就可以保存整个网页为图片了
 
 > 方法来自 [二小怪](https://www.cnblogs.com/ChouXiaoShou/p/ChromeScreenshot.html)
-

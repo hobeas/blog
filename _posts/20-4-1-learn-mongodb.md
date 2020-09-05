@@ -1,6 +1,6 @@
 ---
 title: mongodb 命令小记
-date:  20-4-1 23:26 +08
+date: 20-4-1 23:26 +08
 ---
 
 # 常用
@@ -38,9 +38,11 @@ db.dropDatabase()
 show tables
 # 查询 users 表的记录
 db.users.find()
+
+# 导出 csv。d 数据库，c 集合，f 字段，o 文件输出路径
+mongoexport --type=csv -d db-test -c user -f _id,name -o ./output.csv
+
 ```
-
-
 
 # 操作用户
 
@@ -82,9 +84,7 @@ db.dropUser('test1')
 - 备份恢复角色：backup、restore
 - 所有数据库角色：readAnyDatabase、readWriteAnyDatabase、userAdminAnyDatabase、dbAdminAnyDatabase
 - 超级用户角色：root
-- 内部角色：__system
-
-
+- 内部角色：\_\_system
 
 # mongoose
 
@@ -94,7 +94,6 @@ db.dropUser('test1')
 
   < 、 <= 、 > 、 >=、!=
 
-
 - 原子操作符
 
   `$and`、`$or`、`$nor`、`$in`、`$nin`、`$or`、`$not`、`$exists`
@@ -103,18 +102,16 @@ db.dropUser('test1')
 
   limit、skip、sort
 
-
 - 数组修改器
-  - $push 已有的数组末尾加入一个元素
-  - $addtoset 往数组里加数据，若数组里已存在，则不会加入（避免重复）
-  - $pop 删除数组元素，只能从头部（-1）或尾部（1）删除一个元素
-  - $pull 删除数组元素，将所有匹配的元素删除
 
+  - \$push 已有的数组末尾加入一个元素
+  - \$addtoset 往数组里加数据，若数组里已存在，则不会加入（避免重复）
+  - \$pop 删除数组元素，只能从头部（-1）或尾部（1）删除一个元素
+  - \$pull 删除数组元素，将所有匹配的元素删除
 
 - 访问量+1，用 `$inc`
 
-  db.findOneAndUpdate({ _id }, { $inc: { views: 1 } }, { new: true })
-
+  db.findOneAndUpdate({ \_id }, { \$inc: { views: 1 } }, { new: true })
 
 - 值为 null 不检查唯一性
 
