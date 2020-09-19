@@ -32,6 +32,9 @@ ls -l --time=atime
 # 创建一个相对路径的超链接
 ln -s ../archive
 
+# 查看隐藏文件
+ls -a
+
 # 将SSH公钥复制到主机，开启无密码登录
 ssh-copy-id root@192.168.0.100
 
@@ -135,6 +138,10 @@ defaults write com.apple.dock springboard-columns -int 10
 # 重启 LaunchPad
 defaults write com.apple.dock ResetLaunchPad -bool TRUE;killall Dock
 
+# 安装软件时禁用检查，即允许任何来源
+sudo spctl --master-disable
+# 关闭
+sudo spctl --master-enable
 ```
 
 mac 禁止应用更新提示：
