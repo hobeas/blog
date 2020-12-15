@@ -251,6 +251,8 @@ pm2 save
 
 # 开机运行
 pm2 startup
+# 取消开机运行
+pm2 unstartup systemd
 
 ```
 

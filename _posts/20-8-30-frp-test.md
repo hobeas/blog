@@ -30,6 +30,8 @@ vi frps.ini
 bind_port = 7010
 ; 监听 HTTP 8081 端口
 vhost_http_port = 8081
+; 鉴权
+token = test_token
 ```
 
 ```sh
@@ -57,6 +59,8 @@ firewall-cmd --zone=public --permanent --add-port=7010/tcp; firewall-cmd --reloa
 ; 你的服务器域名或ip地址
 server_addr = test.com
 server_port = 7010
+; 鉴权
+token = test_token
 
 [web]
 type = http
