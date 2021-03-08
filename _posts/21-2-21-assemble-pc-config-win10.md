@@ -12,7 +12,7 @@ tags: 系统
 
 ```
 CPU i7-10700 2216
-主板 B460-PRO WiFi ATX 1033
+主板 B460-PRO WiFi6 ATX 1033
 硬盘 西数SSD500G+HDD4T 989
 内存 威刚XPG-Z1 16G 491
 电源 鑫谷金牌600W 309
@@ -23,7 +23,9 @@ CPU i7-10700 2216
 
 在 [msdn](https://msdn.itellyou.cn/) 下载最新版系统，使用 EasyU 制作 PE，安装 win10，数字激活（略）
 
-# 新机装软件清单
+# 软件清单
+
+此表暂为新机清单，以后装的软件也会陆续加入
 
 ```
 chrome
@@ -37,6 +39,36 @@ qq
 potPlayer
 7-Zip
 ```
+
+## 截图工具 Snipaste
+
+QQ 截图还可以，但不想每次都打开 QQ，就在 微软商店 下了个 Snipaste
+
+它有个优点，支持自定义文件名设置，如我设为时间格式 `yyMdd_HHmms`，若用 QQ 截图文件名为 `QQ截图_2021-03-01_23-19-07-254.png`，现在用 Snipaste 默认保存为 `21301_23197.png`
+
+## 任务栏透明 TaskbarTools
+
+微软商店有个 TranslucentTB，看名字也知道功能是"半透明任务栏"，而 TaskbarTools 吸引我的是它还提供把"开始"屏幕设为半透明
+
+我用的绿色版免安装，就一个 exe 文件，这使我立即卸载了 TranslucentTB，当然，它也有绿色版，但我不想找了（问就是因为懒）
+
+TaskbarTools 还提供把自己的图标从任务栏移除，这也给我的下一个工具提供想法
+
+## 隐藏托盘图标 PSTrayFactory
+
+像 Snipaste、TaskbarTools，甚至 Rainmeter 这些工具，我们使用它的功能，但极少或几乎不操作它，没必要时时待在任务栏
+
+TaskbarTools 提供自隐藏，别的没提供，于是使用 [PS Tray Factory](http://www.pssoftlab.com/pstf_info.phtml) 这么一个提供隐藏托盘图标的工具
+
+## 窗口多标签 WindowTabs
+
+需要激活一下，否则只能合并三个标签。
+
+## 快速查找文件 Wox + Everything
+
+[Wox](https://github.com/Wox-launcher/Wox/releases) 可快速调出搜索框，快捷键 `Alt+空格键`
+
+[Everything](https://www.voidtools.com/) 快速查找电脑上的文件
 
 # 问题记录
 
