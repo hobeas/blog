@@ -72,11 +72,13 @@ TaskbarTools 提供自隐藏，别的没提供，于是使用 [PS Tray Factory](
 
 # 问题记录
 
-## 去除快捷方式箭头
+## 去除快捷方式箭头[不建议]
 
 1. 按 win+R，输入 "regedit"，打开注册表编辑器，找到 HKEY_CLASSES_ROOT\lnkfile
 
 2. 在 lnkfile 中找到 IsShortcut，右击删除该键值，重启电脑
+
+> 此方法可能导致下一个问题，还是老老实实用 360 去除
 
 ## 点击固定到任务栏的快捷图标报错
 
@@ -114,3 +116,19 @@ git clone git@github.com:xxx/test.git
 ```
 
 > RSA 公钥后续可用于 SSH 免密登录等
+
+## 删除此电脑中的视频图片文档等文件夹
+
+1. Win+R，输入 regedit 回车，找到 `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace`
+
+2. 找到对应键值，右键删除
+
+- 3D 对象: {0DB7E03F-FC29-4DC6-9020-FF41B59E513A}
+- 视频: {f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}
+- 图片: {24ad3ad4-a569-4530-98e1-ab02f9417aa8}
+- 文档: {d3162b92-9365-467a-956b-92703aca08af}
+- 下载: {088e3905-0323-4b02-9826-5d99428e115f}
+- 音乐: {3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}
+- 桌面: {B4BFCC3A-DB2C-424C-B029-7FE99A87C641}
+
+3. 右键底部任务栏 - 任务管理器 - 重启 “Windows 资源管理器”
