@@ -47,6 +47,14 @@ reboot
 # 修改 .bashrc 后使其生效
 source ~/.bashrc
 
+# 查看系统版本
+cat /etc/redhat-release
+# 查看内核版本
+uname -a
+# 查看可登录用户
+cat /etc/passwd | grep -v /sbin/nologin | cut -d : -f 1
+# 查看登录历史
+last
 ```
 
 ## 防火墙 firewall
