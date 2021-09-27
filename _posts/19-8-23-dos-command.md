@@ -55,6 +55,8 @@ uname -a
 cat /etc/passwd | grep -v /sbin/nologin | cut -d : -f 1
 # 查看登录历史
 last
+# 登录失败
+lastb
 ```
 
 ## 防火墙 firewall
@@ -124,6 +126,40 @@ WantedBy=multi-user.target
 1. 执行 `vi /etc/ssh/sshd_config`
 2. 在 `Port 22` 下面加一行 `Port 7011`
 3. 重启 ssh `systemctl restart sshd`
+
+## 禁 IP
+
+使用 iptables
+
+```sh
+# 查看
+iptables -L -n --line-numbers
+
+# 禁。-I Insert，-D Delete，INPUT 入站，DROP 放弃连接
+iptables -I INPUT -s 123.45.6.7 -j DROP
+
+# 解
+iptables -D INPUT -s 123.45.6.7 -j DROP
+# 或。1为行号
+iptables -D INPUT 1
+
+# 禁IP段
+iptables -I INPUT -s 121.0.0.0/8 -j DROP
+
+# 清空
+iptables –flush
+# 或
+iptables -F
+
+```
+
+使用 ipset，暂时不需。
+
+参考
+
+- [CentOS 用 iptables 封 IP 的方法](http://www.360doc.com/content/15/0323/12/14900341_457370635.shtml)
+- [Centos 禁止 IP、封 IP、解除封 IP 的方法](https://www.cnblogs.com/kwang-cai/articles/5236499.html)
+- [iptables 详解](http://blog.chinaunix.net/uid-26495963-id-3279216.html)
 
 # MacOS
 
