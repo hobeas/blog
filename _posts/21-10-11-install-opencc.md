@@ -61,3 +61,28 @@ gyp ERR! find VS - "Visual Studio C++ core features" missing
 打开安装器 `Visual Studio Installer`，点修改，勾选 `使用 C++ 的桌面开发`，安装后重启
 
 解决了，完！
+
+### 新问题：Windows Kits
+
+过几天偶然看到在 D 盘根目录多了个 `Windows Kits` 文件夹，很碍眼，把它移到 `D:\app\Microsoft\`，并在注册表
+
+`计算机\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\Windows\v10.0`
+
+把 `InstallationFolder` 的值设为 `D:\app\Microsoft\Windows Kits\10\`
+
+又过几天，项目要安装新模块，发现报了个 VS 的错
+
+```sh
+npm ERR! D:\app\Microsoft\VS\VC\Tools\MSVC\14.29.30133\include\cstdio(12,10): fatal error C1083: �޷��򿪰����ļ �: ��stdio.h��: No such file or directory [F:\wks\bc\spd-s\node_modules\opencc\build\opencc.vcxproj]
+```
+
+信息有乱码，应该是 `Windows PowerShell` 显示问题，无关紧要。第一猜测是 `Windows Kits` 文件夹移动了，做个软连接
+
+```sh
+# 以管理员身份运行 cmd
+mklink /d "D:\Windows Kits" "D:\app\Microsoft\Windows Kits"
+```
+
+可以了！
+
+D 盘还是有个碍眼的 `Windows Kits` 文件夹，即便只是软链接，之后再看看能不能改动，先这样~~
