@@ -148,3 +148,13 @@ git clone git@github.com:xxx/test.git
 3. 右键底部任务栏 - 任务管理器 - 重启 “Windows 资源管理器”
 
 > 若要恢复，右键-新建-项，把 `新项#1` 改为上表的对应键值，包括前后的花括号
+
+## 去除右键菜单 `使用 Visual Studio 打开(V)`
+
+装了 VS 后，右键菜单多了一项 `使用 Visual Studio 打开(V)`，[移除解决方案](https://social.msdn.microsoft.com/Forums/es-ES/d6520539-78b4-4df2-92ce-ed9f1520b0d6)：
+
+1. 按 Win+R > 输入 regedit 回车 > 找到路径: `HKEY_CLASSES_ROOT\Directory\Background\shell\AnyCode` > 点击 AnyCode
+
+2. 在右边那一栏右击 > 新建(N) > 选择 `DWORD (32 位)值(D)` > 重命名: HideBasedOnVelocityId > 右击这个新建的项 > 选择 `修改(M)` > 修改数值数据为: 6698a6，基数选: 十六进制(H)
+
+该菜单就消失了，若想启用，只需将上述的 HideBasedOnVelocityId 重命名为 ShowBasedOnVelocityId
