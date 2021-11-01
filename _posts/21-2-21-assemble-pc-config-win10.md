@@ -157,4 +157,8 @@ git clone git@github.com:xxx/test.git
 
 2. 在右边那一栏右击 > 新建(N) > 选择 `DWORD (32 位)值(D)` > 重命名: HideBasedOnVelocityId > 右击这个新建的项 > 选择 `修改(M)` > 修改数值数据为: 6698a6，基数选: 十六进制(H)
 
-该菜单就消失了，若想启用，只需将上述的 HideBasedOnVelocityId 重命名为 ShowBasedOnVelocityId
+3. 在路径 `\HKEY_CLASSES_ROOT\Directory\shell\AnyCode` 执行第 2 步同样的操作
+
+   > 执行完第 2 步只是去掉桌面右键，文件夹右键还有，所以要第 3 步
+
+执行完该菜单就消失了，若想启用只需将上述的 HideBasedOnVelocityId 重命名为 ShowBasedOnVelocityId
