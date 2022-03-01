@@ -46,6 +46,10 @@ qq
 
 打开 PotPlayer - 右键 "选项" - 关联 - 取消勾选 `显示播放列表菜单` 和 `显示播放菜单`
 
+实用功能：
+
+- 逐帧播放：按 F 和 D 分别是进退一帧
+
 ## 压缩解压 7-Zip
 
 [7-Zip](https://www.7-zip.org/) 高压缩率、轻量、方便快捷，就像融进系统的工具，一直用的它
@@ -162,3 +166,7 @@ git clone git@github.com:xxx/test.git
    > 执行完第 2 步只是去掉桌面右键，文件夹右键还有，所以要第 3 步
 
 执行完该菜单就消失了，若想启用只需将上述的 HideBasedOnVelocityId 重命名为 ShowBasedOnVelocityId
+
+## 关掉资源管理左侧的 oneDrive
+
+注册表搜索 `018D5C66-4533-4307-9B53-224DE2ED1FE6`，把 `System.IsPinnedToNameSpaceTree` 的值改为 0，然后重启资源管理器
